@@ -41,13 +41,18 @@ const SwapForm: React.FC = () => {
     }
   }, []);
 
-  const handleSwap = () => {
+  
+  useEffect(()=>{
+const handleSwap = () => {
+  // console.log(currencies)
     if (fromCurrency && toCurrency && amount > 0 && currencies[fromCurrency] && currencies[toCurrency]) {
       const priceFrom = currencies[fromCurrency];
       const priceTo = currencies[toCurrency];
       setResult(amount * (priceFrom / priceTo));
     }
   };
+  handleSwap()
+  },[fromCurrency,toCurrency,amount,currencies])
 
   return (
     <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
@@ -76,7 +81,7 @@ const SwapForm: React.FC = () => {
           onChange={(e) => setAmount(parseFloat(e.target.value) || 0)}
         />
       </div>
-      <button onClick={handleSwap} style={{ marginBottom: '10px' }}>Swap</button>
+      {/* <button onClick={handleSwap} style={{ marginBottom: '10px' }}>Swap</button> */}
       <div>
         <p>Result: {result.toFixed(6)} {toCurrency}</p>
       </div>
